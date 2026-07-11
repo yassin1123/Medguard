@@ -1,0 +1,10 @@
+{
+  "name": "medguard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-first drug interaction checker. No servers, no tracking.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
