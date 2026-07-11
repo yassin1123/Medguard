@@ -3,34 +3,16 @@
   "title": "MedGuard Interaction Dataset",
   "description": "The canonical shape for a MedGuard drug dataset. Drop your real data in as a file matching this schema, then point the loader at it.",
   "type": "object",
-  "required": [
-    "meta",
-    "drugs"
-  ],
+  "required": ["meta", "drugs", "interactions"],
   "properties": {
     "meta": {
       "type": "object",
-      "required": [
-        "source",
-        "version",
-        "updated"
-      ],
+      "required": ["source", "version", "updated"],
       "properties": {
-        "source": {
-          "type": "string",
-          "description": "Where the data came from, e.g. 'openFDA' or 'DrugBank open data'."
-        },
-        "version": {
-          "type": "string"
-        },
-        "updated": {
-          "type": "string",
-          "format": "date",
-          "description": "ISO date the dataset was last refreshed."
-        },
-        "license": {
-          "type": "string"
-        }
+        "source": { "type": "string", "description": "Where the data came from, e.g. 'openFDA' or 'DrugBank open data'." },
+        "version": { "type": "string" },
+        "updated": { "type": "string", "format": "date", "description": "ISO date the dataset was last refreshed." },
+        "license": { "type": "string" }
       }
     },
     "drugs": {
@@ -38,30 +20,35 @@
       "description": "Every known drug. `id` is the stable key used by interactions.",
       "items": {
         "type": "object",
-        "required": [
-          "id",
-          "name"
-        ],
+        "required": ["id", "name"],
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "Stable slug, e.g. 'warfarin'."
-          },
-          "name": {
-            "type": "string",
-            "description": "Primary display name."
-          },
+          "id": { "type": "string", "description": "Stable slug, e.g. 'warfarin'." },
+          "name": { "type": "string", "description": "Primary display name." },
           "aliases": {
             "type": "array",
-            "items": {
-              "type": "string"
-            },
+            "items": { "type": "string" },
             "description": "Brand names and common alternates, e.g. ['Coumadin']."
           },
-          "class": {
+          "class": { "type": "string", "description": "Optional drug class, e.g. 'anticoagulant'." }
+        }
+      }
+    },
+    "interactions": {
+      "type": "array",
+      "description": "Pairwise interactions. Order of a/b does not matter; the engine treats them as unordered.",
+      "items": {
+        "type": "object",
+        "required": ["a", "b", "severity", "summary"],
+        "properties": {
+          "a": { "type": "string", "description": "drug id" },
+          "b": { "type": "string", "description": "drug id" },
+          "severity": {
             "type": "string",
-            "description": "Optional drug class, e.g. 'anticoagulant'."
-          }
+            "enum": ["minor", "moderate", "major", "contraindicated"],
+            "description": "How serious the interaction is."
+          },
+          "summary": { "type": "string", "description": "Plain-language, one-sentence explanation." },
+          "advice": { "type": "string", "description": "Optional plain-language next step." }
         }
       }
     }
