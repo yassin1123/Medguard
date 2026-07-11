@@ -6,130 +6,59 @@
     "license": "CC0"
   },
   "drugs": [
-    {
-      "id": "warfarin",
-      "name": "Warfarin",
-      "aliases": [
-        "Coumadin",
-        "Jantoven"
-      ],
-      "class": "anticoagulant"
-    },
-    {
-      "id": "aspirin",
-      "name": "Aspirin",
-      "aliases": [
-        "acetylsalicylic acid",
-        "ASA"
-      ],
-      "class": "NSAID"
-    },
-    {
-      "id": "ibuprofen",
-      "name": "Ibuprofen",
-      "aliases": [
-        "Advil",
-        "Motrin"
-      ],
-      "class": "NSAID"
-    },
-    {
-      "id": "amoxicillin",
-      "name": "Amoxicillin",
-      "aliases": [
-        "Amoxil"
-      ],
-      "class": "antibiotic"
-    },
-    {
-      "id": "metformin",
-      "name": "Metformin",
-      "aliases": [
-        "Glucophage"
-      ],
-      "class": "antidiabetic"
-    },
-    {
-      "id": "lisinopril",
-      "name": "Lisinopril",
-      "aliases": [
-        "Prinivil",
-        "Zestril"
-      ],
-      "class": "ACE inhibitor"
-    },
-    {
-      "id": "simvastatin",
-      "name": "Simvastatin",
-      "aliases": [
-        "Zocor"
-      ],
-      "class": "statin"
-    },
-    {
-      "id": "clarithromycin",
-      "name": "Clarithromycin",
-      "aliases": [
-        "Biaxin"
-      ],
-      "class": "antibiotic"
-    },
-    {
-      "id": "sildenafil",
-      "name": "Sildenafil",
-      "aliases": [
-        "Viagra",
-        "Revatio"
-      ],
-      "class": "PDE5 inhibitor"
-    },
-    {
-      "id": "nitroglycerin",
-      "name": "Nitroglycerin",
-      "aliases": [
-        "Nitrostat",
-        "GTN"
-      ],
-      "class": "nitrate"
-    },
-    {
-      "id": "sertraline",
-      "name": "Sertraline",
-      "aliases": [
-        "Zoloft"
-      ],
-      "class": "SSRI"
-    },
-    {
-      "id": "tramadol",
-      "name": "Tramadol",
-      "aliases": [
-        "Ultram"
-      ],
-      "class": "opioid"
-    }
+    { "id": "warfarin", "name": "Warfarin", "aliases": ["Coumadin", "Jantoven"], "class": "anticoagulant" },
+    { "id": "aspirin", "name": "Aspirin", "aliases": ["acetylsalicylic acid", "ASA"], "class": "NSAID" },
+    { "id": "ibuprofen", "name": "Ibuprofen", "aliases": ["Advil", "Motrin"], "class": "NSAID" },
+    { "id": "amoxicillin", "name": "Amoxicillin", "aliases": ["Amoxil"], "class": "antibiotic" },
+    { "id": "metformin", "name": "Metformin", "aliases": ["Glucophage"], "class": "antidiabetic" },
+    { "id": "lisinopril", "name": "Lisinopril", "aliases": ["Prinivil", "Zestril"], "class": "ACE inhibitor" },
+    { "id": "simvastatin", "name": "Simvastatin", "aliases": ["Zocor"], "class": "statin" },
+    { "id": "clarithromycin", "name": "Clarithromycin", "aliases": ["Biaxin"], "class": "antibiotic" },
+    { "id": "sildenafil", "name": "Sildenafil", "aliases": ["Viagra", "Revatio"], "class": "PDE5 inhibitor" },
+    { "id": "nitroglycerin", "name": "Nitroglycerin", "aliases": ["Nitrostat", "GTN"], "class": "nitrate" },
+    { "id": "sertraline", "name": "Sertraline", "aliases": ["Zoloft"], "class": "SSRI" },
+    { "id": "tramadol", "name": "Tramadol", "aliases": ["Ultram"], "class": "opioid" }
   ],
   "interactions": [
     {
-      "a": "warfarin",
-      "b": "aspirin",
-      "severity": "major",
+      "a": "warfarin", "b": "aspirin", "severity": "major",
       "summary": "Taking these together raises the risk of serious bleeding.",
       "advice": "Do not combine without a doctor's supervision."
     },
     {
-      "a": "warfarin",
-      "b": "ibuprofen",
-      "severity": "major",
-      "summary": "This combination increases bleeding risk, especially in the stomach.",
+      "a": "warfarin", "b": "ibuprofen", "severity": "major",
+      "summary": "This combination increases bleeding risk in the stomach.",
       "advice": "Ask a pharmacist about a safer pain reliever."
     },
     {
-      "a": "aspirin",
-      "b": "ibuprofen",
-      "severity": "moderate",
+      "a": "aspirin", "b": "ibuprofen", "severity": "moderate",
       "summary": "Ibuprofen can block aspirin's heart-protective effect and irritate the stomach.",
       "advice": "Space the doses apart or ask about alternatives."
+    },
+    {
+      "a": "simvastatin", "b": "clarithromycin", "severity": "contraindicated",
+      "summary": "This antibiotic makes statin levels dangerously high and can damage muscles.",
+      "advice": "These should not be taken together. Contact your prescriber."
+    },
+    {
+      "a": "sildenafil", "b": "nitroglycerin", "severity": "contraindicated",
+      "summary": "Together these can cause a sudden, dangerous drop in blood pressure.",
+      "advice": "Never combine. Seek medical advice immediately if taken together."
+    },
+    {
+      "a": "sertraline", "b": "tramadol", "severity": "major",
+      "summary": "This pairing raises the risk of serotonin syndrome, which can be serious.",
+      "advice": "Watch for agitation, fever, or shivering and call a doctor."
+    },
+    {
+      "a": "lisinopril", "b": "ibuprofen", "severity": "moderate",
+      "summary": "Ibuprofen can reduce how well lisinopril lowers blood pressure and stress the kidneys.",
+      "advice": "Occasional use is usually fine; check before regular use."
+    },
+    {
+      "a": "metformin", "b": "clarithromycin", "severity": "minor",
+      "summary": "May slightly change blood sugar levels in some people.",
+      "advice": "Monitor blood sugar if you notice symptoms."
     }
   ]
 }
