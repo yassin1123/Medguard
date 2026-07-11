@@ -23,7 +23,113 @@
         "ASA"
       ],
       "class": "NSAID"
+    },
+    {
+      "id": "ibuprofen",
+      "name": "Ibuprofen",
+      "aliases": [
+        "Advil",
+        "Motrin"
+      ],
+      "class": "NSAID"
+    },
+    {
+      "id": "amoxicillin",
+      "name": "Amoxicillin",
+      "aliases": [
+        "Amoxil"
+      ],
+      "class": "antibiotic"
+    },
+    {
+      "id": "metformin",
+      "name": "Metformin",
+      "aliases": [
+        "Glucophage"
+      ],
+      "class": "antidiabetic"
+    },
+    {
+      "id": "lisinopril",
+      "name": "Lisinopril",
+      "aliases": [
+        "Prinivil",
+        "Zestril"
+      ],
+      "class": "ACE inhibitor"
+    },
+    {
+      "id": "simvastatin",
+      "name": "Simvastatin",
+      "aliases": [
+        "Zocor"
+      ],
+      "class": "statin"
+    },
+    {
+      "id": "clarithromycin",
+      "name": "Clarithromycin",
+      "aliases": [
+        "Biaxin"
+      ],
+      "class": "antibiotic"
+    },
+    {
+      "id": "sildenafil",
+      "name": "Sildenafil",
+      "aliases": [
+        "Viagra",
+        "Revatio"
+      ],
+      "class": "PDE5 inhibitor"
+    },
+    {
+      "id": "nitroglycerin",
+      "name": "Nitroglycerin",
+      "aliases": [
+        "Nitrostat",
+        "GTN"
+      ],
+      "class": "nitrate"
+    },
+    {
+      "id": "sertraline",
+      "name": "Sertraline",
+      "aliases": [
+        "Zoloft"
+      ],
+      "class": "SSRI"
+    },
+    {
+      "id": "tramadol",
+      "name": "Tramadol",
+      "aliases": [
+        "Ultram"
+      ],
+      "class": "opioid"
     }
   ],
-  "interactions": []
+  "interactions": [
+    {
+      "a": "warfarin",
+      "b": "aspirin",
+      "severity": "major",
+      "summary": "Taking these together raises the risk of serious bleeding.",
+      "advice": "Do not combine without a doctor's supervision."
+    },
+    {
+      "a": "warfarin",
+      "b": "ibuprofen",
+      "severity": "major",
+      "summary": "This combination increases bleeding risk, especially in the stomach.",
+      "advice": "Ask a pharmacist about a safer pain reliever."
+    },
+    {
+      "a": "aspirin",
+      "b": "ibuprofen",
+      "severity": "moderate",
+      "summary": "Ibuprofen can block aspirin's heart-protective effect and irritate the stomach.",
+      "advice": "Space the doses apart or ask about alternatives."
+    }
+  ]
 }
