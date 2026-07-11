@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "source": "SAMPLE DATA — illustrative only, not for clinical use",
+    "version": "0.0.0-sample",
+    "updated": "2026-01-01",
+    "license": "CC0"
+  },
+  "drugs": [
+    {
+      "id": "warfarin",
+      "name": "Warfarin",
+      "aliases": [
+        "Coumadin",
+        "Jantoven"
+      ],
+      "class": "anticoagulant"
+    },
+    {
+      "id": "aspirin",
+      "name": "Aspirin",
+      "aliases": [
+        "acetylsalicylic acid",
+        "ASA"
+      ],
+      "class": "NSAID"
+    }
+  ],
+  "interactions": []
+}
