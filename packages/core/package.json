@@ -1,0 +1,14 @@
+{
+  "name": "@medguard/core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic drug interaction engine. Pure functions, no I/O, fully tested.",
+  "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "license": "MIT"
+}
