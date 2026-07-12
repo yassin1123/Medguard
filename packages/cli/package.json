@@ -1,0 +1,13 @@
+{
+  "name": "@medguard/cli",
+  "version": "0.1.0",
+  "description": "Command-line drug interaction checker. Works fully offline.",
+  "type": "module",
+  "bin": {
+    "medguard": "bin/medguard.js"
+  },
+  "dependencies": {
+    "@medguard/core": "0.1.0"
+  },
+  "license": "MIT"
+}
