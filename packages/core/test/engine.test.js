@@ -40,3 +40,38 @@ test('resolve tolerates minor typos', () => {
 test('resolve returns null for gibberish', () => {
   assert.equal(engine().resolve('qqqzzz123'), null);
 });
+
+test('getInteraction is order-independent', () => {
+  const e = engine();
+  const ab = e.getInteraction('warfarin', 'aspirin');
+  const ba = e.getInteraction('aspirin', 'warfarin');
+  assert.equal(ab, ba);
+  assert.equal(ab.severity, 'major');
+});
+
+test('getInteraction returns null when no interaction exists', () => {
+  assert.equal(engine().getInteraction('warfarin', 'metformin'), null);
+});
+
+test('check finds all interacting pairs', () => {
+  const result = engine().check(['Warfarin', 'Aspirin', 'Advil']);
+  assert.equal(result.findings.length, 2);
+});
+
+test('check sorts findings most serious first', () => {
+  const result = engine().check(['Warfarin', 'Aspirin', 'Advil']);
+  assert.equal(result.findings[0].interaction.severity, 'major');
+  assert.equal(result.findings[1].interaction.severity, 'moderate');
+});
+
+test('check separates unresolved input with suggestions', () => {
+  const result = engine().check(['Warfarin', 'notadrug']);
+  assert.equal(result.resolved.length, 1);
+  assert.equal(result.unresolved.length, 1);
+  assert.ok(Array.isArray(result.unresolved[0].suggestions));
+});
+
+test('suggest returns display names ranked by closeness', () => {
+  const names = engine().suggest('warfarn');
+  assert.ok(names.includes('Warfarin'));
+});
