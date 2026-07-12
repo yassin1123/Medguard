@@ -1,0 +1,11 @@
+{
+  "name": "@medguard/web",
+  "version": "0.1.0",
+  "description": "Offline-first PWA for MedGuard. No build step, no framework, no tracking.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.js",
+    "build:data": "node scripts/bundle-data.js"
+  },
+  "license": "MIT"
+}
