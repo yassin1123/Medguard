@@ -108,4 +108,45 @@ export class InteractionEngine {
     return bestDist <= threshold ? best : null;
   }
 
+  /**
+   * Suggest close drug names for input that didn't resolve. Powers "did you
+   * mean?" hints in the frontends.
+   * @param {string} text
+   * @param {number} [limit]
+   * @returns {string[]} display names
+   */
+  suggest(text, limit = 3) {
+    const key = normalize(text);
+    if (!key) return [];
+    const scored = [];
+    const seen = new Set();
+    for (const [name, id] of this._byName) {
+      if (seen.has(id)) continue;
+      seen.add(id);
+      scored.push({ id, dist: levenshtein(key, name) });
+    }
+    return scored
+      .sort((x, y) => x.dist - y.dist)
+      .slice(0, limit)
+      .map((s) => this._byId.get(s.id).name);
+  }
+
+  /**
+   * Look up a single interaction between two drug ids.
+   * @param {string} id1
+   * @param {string} id2
+   * @returns {Interaction | null}
+   */
+  getInteraction(id1, id2) {
+    return this._byPair.get(pairKey(id1, id2)) ?? null;
+  }
+
+  /**
+   * @param {string} id
+   * @returns {Drug | undefined}
+   */
+  getDrug(id) {
+    return this._byId.get(id);
+  }
+
 }
