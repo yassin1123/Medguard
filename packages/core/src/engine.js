@@ -104,7 +104,7 @@ export class InteractionEngine {
         best = id;
       }
     }
-    const threshold = Math.max(1, Math.floor(key.length * 0.25));
+    const threshold = Math.max(1, Math.floor(key.length * 0.34));
     return bestDist <= threshold ? best : null;
   }
 
@@ -149,4 +149,57 @@ export class InteractionEngine {
     return this._byId.get(id);
   }
 
+  /**
+   * The main entry point. Given a list of drug names the user is taking,
+   * return every interacting pair, most serious first, plus any names we
+   * could not identify.
+   *
+   * @param {string[]} names
+   * @returns {{
+   *   resolved: {input: string, id: string, name: string}[],
+   *   unresolved: {input: string, suggestions: string[]}[],
+   *   findings: {a: Drug, b: Drug, interaction: Interaction}[]
+   * }}
+   */
+  check(names) {
+    const resolved = [];
+    const unresolved = [];
+
+    for (const input of names) {
+      const id = this.resolve(input);
+      if (id) {
+        resolved.push({ input, id, name: this._byId.get(id).name });
+      } else {
+        unresolved.push({ input, suggestions: this.suggest(input) });
+      }
+    }
+
+    const findings = [];
+    for (let i = 0; i < resolved.length; i++) {
+      for (let j = i + 1; j < resolved.length; j++) {
+        const ix = this.getInteraction(resolved[i].id, resolved[j].id);
+        if (ix) {
+          findings.push({
+            a: this._byId.get(resolved[i].id),
+            b: this._byId.get(resolved[j].id),
+            interaction: ix,
+          });
+        }
+      }
+    }
+
+    findings.sort((x, y) =>
+      compareSeverityDesc(x.interaction.severity, y.interaction.severity)
+    );
+
+    // Dedupe resolved entries by id while preserving user's typed input.
+    const seenIds = new Set();
+    const uniqueResolved = resolved.filter((r) => {
+      if (seenIds.has(r.id)) return false;
+      seenIds.add(r.id);
+      return true;
+    });
+
+    return { resolved: uniqueResolved, unresolved, findings };
+  }
 }
