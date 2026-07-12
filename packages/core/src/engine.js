@@ -83,4 +83,29 @@ export class InteractionEngine {
     }
   }
 
+  /**
+   * Resolve a free-text drug name to a drug id, or null if no confident match.
+   * Exact (normalised) matches win; otherwise we allow a small edit distance.
+   * @param {string} text
+   * @returns {string | null}
+   */
+  resolve(text) {
+    const key = normalize(text);
+    if (!key) return null;
+    if (this._byName.has(key)) return this._byName.get(key);
+
+    // Fuzzy fallback: nearest name within a tight threshold.
+    let best = null;
+    let bestDist = Infinity;
+    for (const [name, id] of this._byName) {
+      const dist = levenshtein(key, name);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = id;
+      }
+    }
+    const threshold = Math.max(1, Math.floor(key.length * 0.25));
+    return bestDist <= threshold ? best : null;
+  }
+
 }
