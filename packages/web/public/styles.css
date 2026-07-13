@@ -94,3 +94,131 @@ body {
   color: var(--ink);
 }
 .hero span { color: var(--brand); }
+
+/* ---- Input card ---- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+.field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.field-hint {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  margin: 0 0 12px;
+}
+
+.entry-row {
+  display: flex;
+  gap: 8px;
+}
+.entry-row input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 13px 14px;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--ink);
+}
+.entry-row input:focus-visible {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px rgba(14, 124, 134, 0.18);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+}
+.btn-add {
+  padding: 0 18px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 600;
+}
+.btn-add:hover { background: var(--brand-deep); }
+
+.suggestions {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.suggestions button {
+  padding: 6px 11px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.suggestions button:hover { border-color: var(--brand); color: var(--brand); }
+
+/* ---- Chips (the medicines you've added) ---- */
+.chips {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chips:empty { display: none; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 8px 8px 14px;
+  background: #eef5f4;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-weight: 500;
+}
+.chip.unknown {
+  background: #fdf2f2;
+  border-color: #f3c6c6;
+  color: var(--sev-major);
+}
+.chip button {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: rgba(15, 43, 46, 0.08);
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1;
+}
+.chip button:hover { background: rgba(15, 43, 46, 0.18); }
+
+.actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+}
+.btn-check {
+  flex: 1;
+  padding: 15px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.btn-check:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-clear {
+  padding: 15px 18px;
+  background: transparent;
+  border: 2px solid var(--line);
+  color: var(--ink-soft);
+  font-weight: 600;
+}
