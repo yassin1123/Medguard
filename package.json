@@ -2,8 +2,16 @@
   "name": "medguard",
   "version": "0.1.0",
   "private": true,
-  "description": "Offline-first drug interaction checker. No servers, no tracking.",
+  "description": "Offline-first drug interaction checker. No servers, no tracking, works anywhere.",
   "license": "MIT",
+  "workspaces": [
+    "packages/core",
+    "packages/cli"
+  ],
+  "scripts": {
+    "test": "npm run test --workspace=@medguard/core",
+    "cli": "node packages/cli/bin/medguard.js"
+  },
   "engines": {
     "node": ">=18"
   }
