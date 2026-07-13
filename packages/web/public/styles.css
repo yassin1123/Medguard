@@ -222,3 +222,108 @@ button {
   color: var(--ink-soft);
   font-weight: 600;
 }
+
+/* ---- Results ---- */
+.results { margin-top: 28px; }
+.results:empty { display: none; }
+
+.summary-banner {
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.summary-banner.clear { background: #e6f4ec; color: var(--ok); }
+.summary-banner.warn { background: #fdeaea; color: var(--sev-major); }
+.summary-banner svg { flex: none; width: 24px; height: 24px; }
+
+.finding {
+  display: flex;
+  gap: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+/* The signature: a thick severity spine readable at a glance. */
+.finding .spine {
+  flex: none;
+  width: 10px;
+  align-self: stretch;
+}
+.finding[data-sev='minor'] .spine { background: var(--sev-minor); }
+.finding[data-sev='moderate'] .spine { background: var(--sev-moderate); }
+.finding[data-sev='major'] .spine { background: var(--sev-major); }
+.finding[data-sev='contraindicated'] .spine { background: var(--sev-critical); }
+
+.finding-body { padding: 16px 18px; }
+.finding-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.finding[data-sev='minor'] .finding-tag { background: #e8f0fa; color: var(--sev-minor); }
+.finding[data-sev='moderate'] .finding-tag { background: #fbf1de; color: var(--sev-moderate); }
+.finding[data-sev='major'] .finding-tag { background: #fdeaea; color: var(--sev-major); }
+.finding[data-sev='contraindicated'] .finding-tag { background: #f3dede; color: var(--sev-critical); }
+
+.finding h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+.finding p { margin: 0; }
+.finding .advice {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+  color: var(--brand-deep);
+  font-weight: 500;
+}
+
+.unresolved-note {
+  background: #fdf7ee;
+  border: 1px solid #f0dcc0;
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  color: #7a5b1e;
+  font-size: 0.92rem;
+}
+
+/* ---- Footer / disclaimer ---- */
+.disclaimer {
+  margin-top: 36px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: #eef5f4;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+.disclaimer strong { color: var(--ink); }
+
+.offline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+.offline-badge .dot {
+  width: 8px; height: 8px; border-radius: 999px; background: var(--ok);
+}
