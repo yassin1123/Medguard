@@ -44,8 +44,7 @@ function addMedicine(rawName) {
   added.push({ key, display, known: Boolean(id) });
   els.input.value = '';
   els.suggestions.innerHTML = '';
-  function renderChips() {}
-renderChips();
+  renderChips();
   els.results.innerHTML = '';
   els.input.focus();
 }
@@ -57,6 +56,108 @@ function removeMedicine(key) {
   els.results.innerHTML = '';
 }
 
-/* rendering added in a later commit */
+/* ---------- Rendering ---------- */
 
-renderChips();
+function renderChips() {
+  els.chips.innerHTML = '';
+  for (const m of added) {
+    const li = document.createElement('li');
+    li.className = 'chip' + (m.known ? '' : ' unknown');
+
+    const label = document.createElement('span');
+    label.textContent = m.known ? m.display : `${m.display} (not recognised)`;
+    li.appendChild(label);
+
+    const remove = document.createElement('button');
+    remove.type = 'button';
+    remove.setAttribute('aria-label', `Remove ${m.display}`);
+    remove.textContent = '×';
+    remove.addEventListener('click', () => removeMedicine(m.key));
+    li.appendChild(remove);
+
+    els.chips.appendChild(li);
+  }
+  els.checkBtn.disabled = added.length < 2;
+}
+
+function renderSuggestions(query) {
+  els.suggestions.innerHTML = '';
+  if (query.trim().length < 2 || engine.resolve(query)) return;
+  const names = engine.suggest(query, 4);
+  for (const name of names) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = name;
+    btn.addEventListener('click', () => addMedicine(name));
+    els.suggestions.appendChild(btn);
+  }
+}
+
+function icon(kind) {
+  const paths = {
+    check: '<path d="M20 6 9 17l-5-5"/>',
+    alert: '<path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+  };
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[kind]}</svg>`;
+}
+
+function renderResults() {
+  const result = engine.check(added.map((m) => m.display));
+  const { findings, unresolved } = result;
+  const frag = document.createDocumentFragment();
+
+  // Banner: the one-glance verdict.
+  const banner = document.createElement('div');
+  const hasAlarming = findings.some((f) =>
+    ['major', 'contraindicated'].includes(f.interaction.severity)
+  );
+  if (findings.length === 0) {
+    banner.className = 'summary-banner clear';
+    banner.innerHTML = `${icon('check')}<span>No known interactions found between these medicines.</span>`;
+  } else {
+    banner.className = 'summary-banner ' + (hasAlarming ? 'warn' : '');
+    const n = findings.length;
+    banner.innerHTML = `${icon('alert')}<span>Found ${n} interaction${n === 1 ? '' : 's'} to be aware of.</span>`;
+  }
+  frag.appendChild(banner);
+
+  // Note about anything we couldn't identify.
+  if (unresolved.length) {
+    const note = document.createElement('div');
+    note.className = 'unresolved-note';
+    const names = unresolved.map((u) => `"${u.input}"`).join(', ');
+    note.textContent =
+      `We couldn't recognise ${names}, so it wasn't included. ` +
+      `Check the spelling, or it may not be in this dataset yet.`;
+    frag.appendChild(note);
+  }
+
+  // Each finding, most serious first (engine already sorted).
+  for (const f of findings) {
+    const meta = SEVERITY_META[f.interaction.severity];
+    const card = document.createElement('article');
+    card.className = 'finding';
+    card.dataset.sev = f.interaction.severity;
+    card.innerHTML = `
+      <div class="spine" aria-hidden="true"></div>
+      <div class="finding-body">
+        <span class="finding-tag">${meta.label}</span>
+        <h3>${escapeHtml(f.a.name)} + ${escapeHtml(f.b.name)}</h3>
+        <p>${escapeHtml(f.interaction.summary)}</p>
+        ${f.interaction.advice ? `<p class="advice">${escapeHtml(f.interaction.advice)}</p>` : ''}
+      </div>`;
+    frag.appendChild(card);
+  }
+
+  els.results.innerHTML = '';
+  els.results.appendChild(frag);
+  els.results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+  );
+}
+
+/* wiring added in a later commit */
