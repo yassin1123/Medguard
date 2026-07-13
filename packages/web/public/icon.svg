@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="MedGuard shield">
+  <rect width="512" height="512" rx="112" fill="#0e7c86"/>
+  <path d="M256 96l128 48v104c0 96-128 168-128 168S128 344 128 248V144l128-48z"
+        fill="none" stroke="#ffffff" stroke-width="28" stroke-linejoin="round"/>
+  <path d="M206 254l34 34 68-68" fill="none" stroke="#ffffff"
+        stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
