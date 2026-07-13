@@ -1,0 +1,19 @@
+{
+  "name": "MedGuard — Medicine Interaction Checker",
+  "short_name": "MedGuard",
+  "description": "Check whether your medicines interact. Works fully offline. No account, no tracking.",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f8f7",
+  "theme_color": "#0e7c86",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
