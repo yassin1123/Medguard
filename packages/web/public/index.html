@@ -28,7 +28,46 @@
       </div>
     </header>
 
-    <!-- input card added in a later commit -->
+    <p class="hero">
+      Add the medicines you take, and MedGuard tells you
+      <span>which ones don't mix well</span> — in plain words.
+    </p>
+
+    <main>
+      <section class="card" aria-labelledby="add-heading">
+        <h2 id="add-heading" class="field-label">Add a medicine</h2>
+        <p class="field-hint">Type a medicine name or its brand name, then press Add. You can use everyday spellings.</p>
+
+        <div class="entry-row">
+          <label class="sr-only" for="drug-input">Medicine name</label>
+          <input id="drug-input" type="text" autocomplete="off" autocapitalize="off"
+                 spellcheck="false" placeholder="e.g. Aspirin, Advil, Coumadin…" />
+          <button class="btn-add" id="add-btn" type="button">Add</button>
+        </div>
+
+        <div class="suggestions" id="suggestions" role="listbox" aria-label="Suggestions"></div>
+
+        <ul class="chips" id="chips" aria-label="Medicines you've added"></ul>
+
+        <div class="actions">
+          <button class="btn-check" id="check-btn" type="button" disabled>Check my medicines</button>
+          <button class="btn-clear" id="clear-btn" type="button">Clear</button>
+        </div>
+      </section>
+
+      <section class="results" id="results" aria-live="polite" aria-atomic="false"></section>
+    </main>
+
+    <p class="offline-badge"><span class="dot" aria-hidden="true"></span> Works offline — your list never leaves this device.</p>
+
+    <aside class="disclaimer">
+      <strong>MedGuard is an informational tool, not medical advice.</strong>
+      It can miss interactions and does not know your dose, health history, or other factors.
+      Always check with a pharmacist or doctor before changing how you take any medicine.
+      In an emergency, call your local emergency number.
+    </aside>
   </div>
+
+  <script type="module" src="app.js"></script>
 </body>
 </html>
