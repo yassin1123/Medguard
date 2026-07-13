@@ -46,7 +46,6 @@ function addMedicine(rawName) {
   els.suggestions.innerHTML = '';
   renderChips();
   els.results.innerHTML = '';
-  els.input.focus();
 }
 
 function removeMedicine(key) {
@@ -142,9 +141,9 @@ function renderResults() {
       <div class="spine" aria-hidden="true"></div>
       <div class="finding-body">
         <span class="finding-tag">${meta.label}</span>
-        <h3>${escapeHtml(f.a.name)} + ${escapeHtml(f.b.name)}</h3>
-        <p>${escapeHtml(f.interaction.summary)}</p>
-        ${f.interaction.advice ? `<p class="advice">${escapeHtml(f.interaction.advice)}</p>` : ''}
+        <h3>${f.a.name} + ${f.b.name}</h3>
+        <p>${f.interaction.summary}</p>
+        ${f.interaction.advice ? `<p class="advice">${f.interaction.advice}</p>` : ''}
       </div>`;
     frag.appendChild(card);
   }
@@ -160,4 +159,32 @@ function escapeHtml(s) {
   );
 }
 
-/* wiring added in a later commit */
+/* ---------- Wiring ---------- */
+
+els.addBtn.addEventListener('click', () => addMedicine(els.input.value));
+els.input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    addMedicine(els.input.value);
+  }
+});
+els.input.addEventListener('input', () => renderSuggestions(els.input.value));
+els.checkBtn.addEventListener('click', renderResults);
+els.clearBtn.addEventListener('click', () => {
+  added.length = 0;
+  renderChips();
+  els.results.innerHTML = '';
+  els.suggestions.innerHTML = '';
+  els.input.focus();
+});
+
+renderChips();
+
+// Register the service worker so the app keeps working with no connection.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {
+      /* Offline support is a progressive enhancement; ignore failures. */
+    });
+  });
+}
