@@ -46,6 +46,7 @@ function addMedicine(rawName) {
   els.suggestions.innerHTML = '';
   renderChips();
   els.results.innerHTML = '';
+  els.input.focus();
 }
 
 function removeMedicine(key) {
