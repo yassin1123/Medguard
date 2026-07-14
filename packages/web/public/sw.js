@@ -9,7 +9,7 @@
  * Bump CACHE_VERSION whenever shell files change to retire the old cache.
  */
 
-const CACHE_VERSION = 'medguard-v0';
+const CACHE_VERSION = 'medguard-v1';
 
 const SHELL = [
   './',
