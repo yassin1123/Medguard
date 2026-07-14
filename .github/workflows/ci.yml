@@ -8,11 +8,31 @@ on:
 
 jobs:
   test:
+    name: Test on Node ${{ matrix.node }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [18, 20, 22]
+
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Set up Node ${{ matrix.node }}
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm install
-      - run: npm test --workspace=@medguard/core
+          node-version: ${{ matrix.node }}
+
+      - name: Install
+        run: npm install
+
+      - name: Run core tests
+        run: npm test --workspace=@medguard/core
+
+      - name: Run CLI tests
+        run: npm test --workspace=@medguard/cli
+        env:
+          NO_COLOR: '1'
+
+      - name: Verify web data bundle builds
+        run: npm run build:data --workspace=@medguard/web
