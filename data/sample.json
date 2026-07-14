@@ -27,7 +27,7 @@
     },
     {
       "a": "warfarin", "b": "ibuprofen", "severity": "major",
-      "summary": "This combination increases bleeding risk in the stomach.",
+      "summary": "This combination increases bleeding risk, especially in the stomach.",
       "advice": "Ask a pharmacist about a safer pain reliever."
     },
     {
