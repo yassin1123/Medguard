@@ -4,8 +4,7 @@
   "description": "Command-line drug interaction checker. Works fully offline.",
   "type": "module",
   "scripts": {
-    "test": "node --test test/"  },
-  "bin": {
+    "test": "node --test"  "bin": {
     "medguard": "bin/medguard.js"
   },
   "dependencies": {
