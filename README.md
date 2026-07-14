@@ -12,8 +12,7 @@ Check whether the medicines someone takes might interact — in plain language a
 
 ---
 
-> [!IMPORTANT]
-> **MedGuard is an informational tool, not medical advice.** It does not know a person's dose, health history, or other factors, and it can miss interactions. Always consult a pharmacist or doctor before changing how any medicine is taken. In an emergency, call your local emergency number.
+> **Note:** MedGuard is an informational tool, not medical advice. It does not know a person's dose, health history, or other factors, and it can miss interactions. Always consult a pharmacist or doctor before changing how any medicine is taken. In an emergency, call your local emergency number.
 
 ## Why this exists
 
@@ -92,3 +91,34 @@ MedGuard ships with a small **sample** dataset (`data/sample.json`) that is illu
 The loader **validates** every dataset before use and reports all problems at once (duplicate ids, interactions referencing unknown drugs, bad severities, and so on), so a bad file fails loudly instead of producing silently wrong answers.
 
 See [`docs/DATA.md`](docs/DATA.md) for the full data guide.
+
+## Architecture
+
+```
+medguard/
+├── data/
+│   ├── schema.json        # the dataset contract
+│   └── sample.json        # illustrative sample data (swap this out)
+├── packages/
+│   ├── core/              # @medguard/core — the engine (pure, tested)
+│   │   ├── src/
+│   │   │   ├── severity.js    # severity model & ordering
+│   │   │   ├── normalize.js   # forgiving text matching
+│   │   │   ├── validate.js    # dataset validation
+│   │   │   ├── engine.js      # indexes + lookup + check()
+│   │   │   └── index.js       # public API
+│   │   └── test/          # node:test suite
+│   ├── cli/               # @medguard/cli — terminal frontend
+│   └── web/               # @medguard/web — offline PWA frontend
+└── docs/
+```
+
+The **core** is the single source of truth. Both frontends are thin: they handle input and presentation, then hand off to `engine.check()`. See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for the design rationale.
+
+## Contributing
+
+Contributions are welcome — especially data, accessibility improvements, and translations. Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) first. Every change should keep the core pure and the test suite green.
+
+## License
+
+MIT — see [`LICENSE`](LICENSE).
