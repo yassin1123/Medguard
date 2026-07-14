@@ -71,6 +71,11 @@ test('check separates unresolved input with suggestions', () => {
   assert.ok(Array.isArray(result.unresolved[0].suggestions));
 });
 
+test('check dedupes when the same drug is entered twice', () => {
+  const result = engine().check(['Aspirin', 'ASA']);
+  assert.equal(result.resolved.length, 1);
+});
+
 test('suggest returns display names ranked by closeness', () => {
   const names = engine().suggest('warfarn');
   assert.ok(names.includes('Warfarin'));
