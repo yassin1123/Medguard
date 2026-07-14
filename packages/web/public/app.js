@@ -142,9 +142,9 @@ function renderResults() {
       <div class="spine" aria-hidden="true"></div>
       <div class="finding-body">
         <span class="finding-tag">${meta.label}</span>
-        <h3>${f.a.name} + ${f.b.name}</h3>
-        <p>${f.interaction.summary}</p>
-        ${f.interaction.advice ? `<p class="advice">${f.interaction.advice}</p>` : ''}
+        <h3>${escapeHtml(f.a.name)} + ${escapeHtml(f.b.name)}</h3>
+        <p>${escapeHtml(f.interaction.summary)}</p>
+        ${f.interaction.advice ? `<p class="advice">${escapeHtml(f.interaction.advice)}</p>` : ''}
       </div>`;
     frag.appendChild(card);
   }
