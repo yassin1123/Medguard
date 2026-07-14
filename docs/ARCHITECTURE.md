@@ -5,7 +5,7 @@ This document explains *why* MedGuard is shaped the way it is. The short version
 ## The shape
 
 ```
-          +-------------------------+
+          ┌─────────────────────────┐
           │     @medguard/core      │
           │  (pure, no I/O, tested)  │
           │                          │
