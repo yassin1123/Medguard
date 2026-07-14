@@ -104,7 +104,7 @@ export class InteractionEngine {
         best = id;
       }
     }
-    const threshold = Math.max(1, Math.floor(key.length * 0.34));
+    const threshold = Math.max(1, Math.floor(key.length * 0.25));
     return bestDist <= threshold ? best : null;
   }
 
