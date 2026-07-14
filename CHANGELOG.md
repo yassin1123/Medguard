@@ -15,7 +15,7 @@ to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   calm, accessible interface.
 - Dataset schema and an illustrative sample dataset.
 - Documentation: architecture, data guide, contributing guide.
-- Continuous integration.
+- Continuous integration across Node 18, 20, and 22.
 
 ### Note
 - The bundled dataset is a small sample for demonstration only and is not for
