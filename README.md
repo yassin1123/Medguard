@@ -4,7 +4,7 @@
 
 **An offline-first drug interaction checker. No servers, no accounts, no tracking.**
 
-Check whether the medicines someone takes might interact — in plain language anyone can act on. Runs entirely on-device, so it keeps working on a plane, in a rural clinic, or during an outage.
+Check whether the medicines someone takes might interact — in plain language a non-expert can act on. Runs entirely on-device, so it keeps working on a plane, in a rural clinic, or during an outage.
 
 [Why this exists](#why-this-exists) · [Quick start](#quick-start) · [Using your own data](#using-your-own-data) · [Architecture](#architecture) · [Contributing](#contributing)
 
@@ -12,7 +12,8 @@ Check whether the medicines someone takes might interact — in plain language a
 
 ---
 
-> **Note:** MedGuard is an informational tool, not medical advice. It does not know a person's dose, health history, or other factors, and it can miss interactions. Always consult a pharmacist or doctor before changing how any medicine is taken. In an emergency, call your local emergency number.
+> [!IMPORTANT]
+> **MedGuard is an informational tool, not medical advice.** It does not know a person's dose, health history, or other factors, and it can miss interactions. Always consult a pharmacist or doctor before changing how any medicine is taken. In an emergency, call your local emergency number.
 
 ## Why this exists
 
