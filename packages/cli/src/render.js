@@ -37,7 +37,7 @@ export function renderResult(result) {
   lines.push('');
 
   if (findings.length === 0) {
-    lines.push(color.green('No interactions found.'));
+    lines.push(color.green('No known interactions found between these.'));
   } else {
     const count = findings.length;
     lines.push(
